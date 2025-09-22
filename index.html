@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蒋嘉豪 | 跨界设计师作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#FF7D00',
+                        accent: '#00B42A',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        'space': ['"Space Grotesk"', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .rotate-hover {
+                transition: transform 0.5s ease;
+            }
+            .rotate-hover:hover {
+                transform: rotate(2deg) scale(1.02);
+            }
+            .clip-path-slant {
+                clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            }
+            .scroll-indicator {
+                height: 3px;
+                background: linear-gradient(90deg, #165DFF, #00B42A);
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                width: 0%;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light text-dark antialiased">
+    <!-- 滚动进度指示器 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="font-space font-bold text-2xl tracking-tight text-primary">
+                    蒋嘉豪<span class="text-secondary">.</span>
+                </a>
+                
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="font-medium hover:text-primary transition-colors">关于</a>
+                    <a href="#skills" class="font-medium hover:text-primary transition-colors">技能</a>
+                    <a href="#portfolio" class="font-medium hover:text-primary transition-colors">作品</a>
+                    <a href="#experience" class="font-medium hover:text-primary transition-colors">经历</a>
+                    <a href="#contact" class="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200">
+                        联系我
+                    </a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button class="md:hidden text-2xl" id="menuBtn">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobileMenu">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#about" class="py-2 font-medium hover:text-primary transition-colors">关于</a>
+                <a href="#skills" class="py-2 font-medium hover:text-primary transition-colors">技能</a>
+                <a href="#portfolio" class="py-2 font-medium hover:text-primary transition-colors">作品</a>
+                <a href="#experience" class="py-2 font-medium hover:text-primary transition-colors">经历</a>
+                <a href="#contact" class="py-3 text-center bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                    联系我
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部 Hero Section -->
+    <header class="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -mr-48 -mt-48"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary/5 rounded-full -ml-20 -mb-20"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 order-2 lg:order-1">
+                    <h1 class="font-space font-bold text-[clamp(2.5rem,5vw,4rem)] leading-tight mb-6">
+                        建筑与数字<br>
+                        <span class="text-primary">跨界设计</span> 实践者
+                    </h1>
+                    
+                    <p class="text-lg text-gray-600 mb-8 max-w-xl">
+                        我是一名融合建筑设计思维、3D建模技术与交互设计的跨界创作者，专注于打造有温度的空间与数字体验。
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#portfolio" class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
+                            浏览作品集
+                        </a>
+                        <a href="#contact" class="px-8 py-3 border border-gray-300 rounded-lg font-medium hover:border-primary hover:text-primary transition-colors">
+                            了解更多
+                        </a>
+                    </div>
+                    
+                    <!-- 技能标签 -->
+                    <div class="flex flex-wrap gap-3">
+                        <div class="px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center gap-2">
+                            <i class="fa fa-building text-primary"></i>
+                            <span>建筑设计</span>
+                        </div>
+                        <div class="px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center gap-2">
+                            <i class="fa fa-cube text-secondary"></i>
+                            <span>3D建模</span>
+                        </div>
+                        <div class="px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center gap-2">
+                            <i class="fa fa-paint-brush text-accent"></i>
+                            <span>UI设计</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 order-1 lg:order-2 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl rotate-hover">
+                        <img src="images/992f6a0f8079cf448e6f6799fe650aaa.jpg" alt="蒋嘉豪的职业形象照，背景为设计工作室" class="w-full h-auto">
+                    </div>
+                    
+                    <!-- 装饰元素 -->
+                    <div class="absolute top-10 -right-5 w-32 h-32 bg-primary/10 rounded-lg -rotate-12 z-0"></div>
+                    <div class="absolute -bottom-5 -left-5 w-24 h-24 bg-secondary/10 rounded-lg rotate-12 z-0"></div>
+                    
+                    <!-- 悬浮信息卡 -->
+                    <div class="absolute -bottom-10 -left-10 bg-white p-4 rounded-xl shadow-xl border border-gray-100 z-20 hidden md:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                <i class="fa fa-trophy text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-space font-semibold">丰富设计经验</p>
+                                <p class="text-sm text-gray-500">多个成功项目</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 关于我 About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-space font-bold text-3xl md:text-4xl mb-4">关于我</h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 relative">
+                    <div class="relative z-10">
+                        <img src="images/fbc5301caba1cb58fa2793eea2f478b4.jpg" alt="蒋嘉豪在工作室工作的场景" class="w-full h-auto rounded-2xl shadow-xl">
+                        
+                        <!-- 悬浮卡片 -->
+                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl border border-gray-100 max-w-xs hidden md:block">
+                            <p class="italic text-gray-600 mb-3">"设计是连接空间与情感的桥梁，无论是物理还是数字空间。"</p>
+                            <p class="font-medium">— 设计理念</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 装饰元素 -->
+                    <div class="absolute top-8 -left-8 w-40 h-40 bg-accent/10 rounded-full z-0"></div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h3 class="font-space font-bold text-2xl mb-6">跨界设计师的多元视角</h3>
+                    
+                    <p class="text-gray-600 mb-6">
+                        我的设计旅程始于建筑学学习，培养了我对空间、比例和结构的敏感度。在校实习过程中，我积极参与设计院工作，参与了多个商业和住宅项目的设计。
+                    </p>
+                    
+                    <p class="text-gray-600 mb-6">
+                        在建筑实践中，我发现3D建模不仅是设计工具，更是创意表达的媒介。这促使我深入学习各类建模软件，从精准的建筑模型到富有想象力的概念设计。
+                    </p>
+                    
+                    <p class="text-gray-600 mb-8">
+                        随着数字时代的到来，我将空间设计思维延伸到了用户界面领域。建筑设计中的"人性化空间"理念与交互设计中的"用户体验"不谋而合，这种跨界视角让我的设计既美观又实用。
+                    </p>
+                    
+                    <!-- 数据统计 -->
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="text-center">
+                            <p class="font-space font-bold text-3xl text-primary mb-1 counter" data-target="2">2</p>
+                            <p class="text-sm text-gray-500">年经验</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-space font-bold text-3xl text-secondary mb-1 counter" data-target="7">7</p>
+                            <p class="text-sm text-gray-500">完成项目</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-space font-bold text-3xl text-accent mb-1 counter" data-target="13">13</p>
+                            <p class="text-sm text-gray-500">获得奖项</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#portfolio" class="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80 transition-colors">
+                        查看我的作品 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能展示 Skills Section -->
+    <section id="skills" class="py-20 bg-light clip-path-slant">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-space font-bold text-3xl md:text-4xl mb-4">专业技能</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">我的技能组合横跨建筑设计、3D建模与UI设计三大领域，形成独特的设计方法论</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 建筑设计技能 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
+                        <i class="fa fa-building text-2xl"></i>
+                    </div>
+                    <h3 class="font-space font-bold text-xl mb-4">建筑设计</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">空间规划</span>
+                                <span class="text-sm text-primary">95%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">建筑表现</span>
+                                <span class="text-sm text-primary">90%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">施工图设计</span>
+                                <span class="text-sm text-primary">85%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-medium mb-3">专业工具</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">AutoCAD</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Revit</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">SketchUp</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Enscape</span>
+                    </div>
+                </div>
+                
+                <!-- 3D建模技能 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary mb-6">
+                        <i class="fa fa-cube text-2xl"></i>
+                    </div>
+                    <h3 class="font-space font-bold text-xl mb-4">3D建模</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">3DMAX建模</span>
+                                <span class="text-sm text-secondary">92%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-secondary" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">材质与渲染</span>
+                                <span class="text-sm text-secondary">88%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-secondary" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">动画制作</span>
+                                <span class="text-sm text-secondary">80%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-secondary" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-medium mb-3">专业工具</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">3ds Max</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Maya</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">V-Ray</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Corona</span>
+                    </div>
+                </div>
+                
+                <!-- UI设计技能 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+                    <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center text-accent mb-6">
+                        <i class="fa fa-paint-brush text-2xl"></i>
+                    </div>
+                    <h3 class="font-space font-bold text-xl mb-4">UI设计</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">界面设计</span>
+                                <span class="text-sm text-accent">89%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent" style="width: 89%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">交互设计</span>
+                                <span class="text-sm text-accent">85%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">图像处理</span>
+                                <span class="text-sm text-accent">87%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-accent" style="width: 87%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-medium mb-3">专业工具</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Figma</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">AI</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">PS</span>
+                      
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 技能雷达图 -->
+            <div class="mt-20 bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <h3 class="font-space font-bold text-xl mb-6 text-center">技能分布</h3>
+                <div class="w-full max-w-2xl mx-auto h-80">
+                    <canvas id="skillsRadarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集 Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-space font-bold text-3xl md:text-4xl mb-4">精选作品</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">探索我的设计世界，每一个作品都融合了空间美学与功能性</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <!-- 作品分类 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="px-6 py-2 bg-primary text-white rounded-lg font-medium">全部作品</button>
+                <button class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">建筑设计</button>
+                <button class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">3D建模</button>
+                <button class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">UI设计</button>
+            </div>
+            
+            <!-- 作品网格 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 作品1 -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="images/b41cc485c2e1693a25a2e9bb82402d16.jpg" alt="滨水景观改造" class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <span class="px-3 py-1 bg-primary text-white text-xs rounded-full">建筑设计</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-space font-bold text-xl mb-2 group-hover:text-primary transition-colors">滨水景观改造</h3>
+                        <p class="text-gray-600 mb-4">智绿重生 清水景园，位于清水塘工业遗址片区的建筑景观改造设计。</p>
+                        <a href="#" class="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80 transition-colors">
+                            查看详情 <i class="fa fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 作品2 -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="images/image 1.png" alt="电商海报渲染" class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <span class="px-3 py-1 bg-secondary text-white text-xs rounded-full">3D建模</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-space font-bold text-xl mb-2 group-hover:text-secondary transition-colors">电商海报渲染</h3>
+                        <p class="text-gray-600 mb-4">利用3D Max技术进行商品场景的基础搭建，并进行光彩渲染。</p>
+                        <a href="#" class="inline-flex items-center gap-2 font-medium text-secondary hover:text-secondary/80 transition-colors">
+                            查看详情 <i class="fa fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 作品3 -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="images/dadad.png" alt="游戏商城基础界面" class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <span class="px-3 py-1 bg-accent text-white text-xs rounded-full">UI设计</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-space font-bold text-xl mb-2 group-hover:text-accent transition-colors">游戏商城基础界面</h3>
+                        <p class="text-gray-600 mb-4">为玩家打造的可视化游戏商城界面，符合受众的界面和直观的游戏推荐。</p>
+                        <a href="#" class="inline-flex items-center gap-2 font-medium text-accent hover:text-accent/80 transition-colors">
+                            查看详情 <i class="fa fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 作品4 -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="images/004f007a4d8a6e84a29ff9291728cba0.jpg" alt="旧改再生项目" class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <span class="px-3 py-1 bg-primary text-white text-xs rounded-full">建筑设计</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-space font-bold text-xl mb-2 group-hover:text-primary transition-colors">旧改再生项目</h3>
+                        <p class="text-gray-600 mb-4">基于老旧建筑原有结构的基础上进行旧改，焕发新的生机。</p>
+                        <a href="#" class="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80 transition-colors">
+                            查看详情 <i class="fa fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 作品5 -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="images/image 17.png" alt="高达模型" class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <span class="px-3 py-1 bg-secondary text-white text-xs rounded-full">3D建模</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-space font-bold text-xl mb-2 group-hover:text-secondary transition-colors">高达模型</h3>
+                        <p class="text-gray-600 mb-4">可3D打印的高达模型，具有较高的自由度完成度。</p>
+                        <a href="#" class="inline-flex items-center gap-2 font-medium text-secondary hover:text-secondary/80 transition-colors">
+                            查看详情 <i class="fa fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 作品6 -->
+                <div class="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden">
+                        <img src="images/c0ef38a49370e11a4af009372a10c032.png" alt="逸行无忧购票平台" class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <span class="px-3 py-1 bg-accent text-white text-xs rounded-full">UI设计</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-space font-bold text-xl mb-2 group-hover:text-accent transition-colors">逸行无忧购票平台</h3>
+                        <p class="text-gray-600 mb-4">帮助用户按照个人需求所向，一键购买最符合自身要求的车票。</p>
+                        <a href="#" class="inline-flex items-center gap-2 font-medium text-accent hover:text-accent/80 transition-colors">
+                            查看详情 <i class="fa fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 border border-primary text-primary font-medium rounded-lg hover:bg-primary hover:text-white transition-colors shadow-md hover:shadow-lg">
+                    查看更多作品 <i class="fa fa-long-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 经历 Experience Section -->
+    <section id="experience" class="py-20 bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-space font-bold text-3xl md:text-4xl mb-4">专业经历</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">我的学习旅程，从建筑设计到数字创意，不断拓展设计的边界</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <div class="relative">
+                <!-- 时间线 -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2"></div>
+                
+                <!-- 经历列表 -->
+                <div class="space-y-12 relative">
+                    <!-- 经历1 -->
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1 mt-6 md:mt-0">
+                            <span class="text-sm text-primary font-medium">2022年 - 至今</span>
+                            <h3 class="font-space font-bold text-xl mt-1 mb-3">湖南工业大学</h3>
+                            <p class="text-gray-600 mb-2">建筑学学生</p>
+                            <p class="text-gray-600">
+                                主修建筑学专业，自学数字媒体设计，3D建模软件，为跨界设计之路奠定基础。
+                            </p>
+                        </div>
+                        <div class="md:w-12 flex justify-center order-1 md:order-2">
+                            <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-medium z-10">
+                                1
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 order-3 hidden md:block"></div>
+                    </div>
+                    
+                    <!-- 经历2 -->
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 order-2 md:order-1 hidden md:block"></div>
+                        <div class="md:w-12 flex justify-center order-1 md:order-2">
+                            <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-medium z-10">
+                                2
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 order-3 mt-6 md:mt-0">
+                            <span class="text-sm text-secondary font-medium">2025年7月 - 2025年9月</span>
+                            <h3 class="font-space font-bold text-xl mt-1 mb-3">电商设计岗</h3>
+                            <p class="text-gray-600 mb-2">重庆邦康文化传播有限公司</p>
+                            <p class="text-gray-600">
+                                专注于商品项目的3D建模与可视化工作，使用3ds Max和V-Ray创建高质量渲染图和动画，协助设计方案的展示与推广。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 经历3 -->
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1 mt-6 md:mt-0">
+                            <span class="text-sm text-accent font-medium">2023年1月 - 2023年2月</span>
+                            <h3 class="font-space font-bold text-xl mt-1 mb-3">涪陵区返家乡</h3>
+                            <p class="text-gray-600 mb-2">涪陵区少年宫</p>
+                            <p class="text-gray-600">
+                                参与儿童项目活动规划工作，负责对接在少年宫开展活动的各个机构单位。
+                            </p>
+                        </div>
+                        <div class="md:w-12 flex justify-center order-1 md:order-2">
+                            <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center font-medium z-10">
+                                3
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 order-3 hidden md:block"></div>
+                    </div>
+                    
+                    <!-- 教育经历 -->
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 order-2 md:order-1 hidden md:block"></div>
+                        <div class="md:w-12 flex justify-center order-1 md:order-2">
+                            <div class="w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center font-medium z-10">
+                                4
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 order-3 mt-6 md:mt-0">
+                            <span class="text-sm text-gray-500 font-medium">2022年6月 - 2022年9月</span>
+                            <h3 class="font-space font-bold text-xl mt-1 mb-3">设计师助理</h3>
+                            <p class="text-gray-600 mb-2">行标装饰设计</p>
+                            <p class="text-gray-600">
+                                参与商业和住宅项目的设计工作，负责从概念设计到施工图的各个阶段，积累了扎实的建筑设计基础。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-space font-bold text-3xl md:text-4xl mb-4">联系我</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">对我的作品感兴趣？想探讨合作机会？请随时联系我</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="bg-light p-8 rounded-2xl shadow-lg">
+                        <h3 class="font-space font-bold text-xl mb-6">发送消息</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors" placeholder="您的姓名">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors" placeholder="您的邮箱">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">主题</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors" placeholder="消息主题">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">消息内容</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors" placeholder="请输入您想对我说的话"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200">
+                            发送消息 <i class="fa fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2 flex flex-col justify-center">
+                    <div class="mb-12">
+                        <h3 class="font-space font-bold text-2xl mb-6">联系方式</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-lg mb-1">邮箱</h4>
+                                    <p class="text-gray-600">1404226396@qq.com</p>
+                                    <p class="text-gray-500 text-sm mt-1">工作日将在24小时内回复</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary flex-shrink-0">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-lg mb-1">电话</h4>
+                                    <p class="text-gray-600">+86 189 9689 0680</p>
+                                    <p class="text-gray-500 text-sm mt-1">联系时间: 9:00 - 18:00</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent flex-shrink-0">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-lg mb-1">住址</h4>
+                                    <p class="text-gray-600">湖南工业大学东苑二栋</p>
+                                    <p class="text-gray-500 text-sm mt-1">欢迎咨询</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-space font-bold text-2xl mb-6">关注我</h3>
+                        
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition-colors">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition-colors">
+                                <i class="fa fa-qq"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-medium mb-3">下载我的简历</h4>
+                            <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 font-medium rounded-lg hover:bg-gray-200 transition-colors">
+                                <i class="fa fa-download text-primary"></i>
+                                <span>蒋嘉豪_设计简历.pdf</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="font-space font-bold text-2xl tracking-tight">
+                        蒋嘉豪<span class="text-primary">.</span>
+                    </a>
+                    <p class="text-gray-400 mt-2 max-w-md">
+                        融合建筑设计、3D建模与UI设计的跨界创作者，打造有温度的空间与数字体验。
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors">关于</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white transition-colors">技能</a>
+                    <a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">作品</a>
+                    <a href="#experience" class="text-gray-400 hover:text-white transition-colors">经历</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors">联系</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    © 2025 蒋嘉豪个人设计师. 保留所有权利.
+                </p>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-weixin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-qq"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-weibo"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航菜单切换
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 滚动进度指示器
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollIndicator").style.width = scrolled + "%";
+            
+            // 导航栏滚动效果
+            const navbar = document.getElementById('navbar');
+            if (winScroll > 50) {
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-md');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动菜单
+                document.getElementById('mobileMenu').classList.add('hidden');
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 数字计数动画
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(() => {
+                            counter.innerText = Math.ceil(count + increment);
+                        }, 1);
+                    } else {
+                        counter.innerText = target;
+                        observer.unobserve(counter);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+        
+        // 技能雷达图
+        const ctx = document.getElementById('skillsRadarChart').getContext('2d');
+        const skillsChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    '空间规划', 
+                    '3DMAX建模', 
+                    'UI设计', 
+                    '渲染表现',
+                    '交互设计',
+                    '项目管理'
+                ],
+                datasets: [{
+                    label: '技能熟练度',
+                    data: [95, 92, 89, 88, 85, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                    borderColor: 'rgba(22, 93, 255, 1)',
+                    pointBackgroundColor: 'rgba(22, 93, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(22, 93, 255, 1)'
+                }]
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+        
+        // 表单提交处理
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我会尽快回复您。');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
